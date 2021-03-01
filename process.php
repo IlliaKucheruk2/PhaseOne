@@ -35,7 +35,7 @@
          $statement->execute(array('email' => $email));
          $number_of_email = $statement->fetchColumn(); 
 
-        // check if email is repeat 
+        // check if date is repeat 
         $sql = "SELECT COUNT(*) from contact_info WHERE date = :date"; 
         $statement = $db->prepare($sql);
         $statement->execute(array('date' => $date));
