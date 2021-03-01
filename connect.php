@@ -2,10 +2,10 @@
 
 try{
 
-$dsn = 'mysql:host=localhost;dbname=table_order';
+$dsn = 'mysql:host=172.31.22.43;dbname=Illia200453638';
 
-$username = 'root';
-$password = 'root'; 
+$username = 'Illia200453638';
+$password = '9JGPrwrjLp'; 
 
 $db = new PDO($dsn,$username,$password);
 
