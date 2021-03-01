@@ -21,10 +21,44 @@
             $value = false;  
         }
 
+        require('connect.php');  
+
+        // check seat availability
+        $sql = "SELECT COUNT(*) from contact_info WHERE seat = :seat"; 
+        $statement = $db->prepare($sql);
+        $statement->execute(array('seat' => $seat));
+        $number_of_tables = $statement->fetchColumn(); 
+
+         // check if email is repeat 
+         $sql = "SELECT COUNT(*) from contact_info WHERE email = :email"; 
+         $statement = $db->prepare($sql);
+         $statement->execute(array('email' => $email));
+         $number_of_email = $statement->fetchColumn(); 
+
+        // check if email is repeat 
+        $sql = "SELECT COUNT(*) from contact_info WHERE date = :date"; 
+        $statement = $db->prepare($sql);
+        $statement->execute(array('date' => $date));
+        $number_of_date = $statement->fetchColumn(); 
+
+        if ($number_of_tables > 0 ) {
+                echo "<p>This seat is unavailable. Please select another one.</p>";
+            $value = false;  
+        }
+        else if ($number_of_email  > 0) {
+            echo "<p>This email was recorded before. Please write another one.</p>";
+            $value = false;  
+        }
+        else if ($number_of_date  > 0) {
+            echo "<p>This date  was recorded before. Please write another one.</p>";
+            $value = false;  
+        }
+    
+    
+        
         if($value === true) {
             try {
                
-                require('connect.php');  
 
                 if(!empty($id)) {
                   $sql = "UPDATE contact_info SET first_name = :firstname, last_name = :lastname,  email = :email, seat = :seat, date = :date WHERE user_id = :user_id;"; 
