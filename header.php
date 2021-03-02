@@ -25,7 +25,7 @@
                 <a class="nav-link active" aria-current="page" href="index.php">Order place</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Menu</a>
+                <a class="nav-link" href="view.php">Recordings</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="#">Pricing</a>
