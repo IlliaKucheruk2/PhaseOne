@@ -2,10 +2,10 @@
 
 try{
 
-$dsn = 'mysql:host=172.31.22.43;dbname=Illia200453638';
+$db = 'mysql:host=localhost;dbname=contact';
 
-$username = 'Illia200453638';
-$password = '9JGPrwrjLp'; 
+$username = 'root';
+$password = 'root'; 
 
 $db = new PDO($dsn,$username,$password);
 
