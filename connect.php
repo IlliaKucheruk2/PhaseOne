@@ -5,7 +5,7 @@ try{
 $dsn = 'mysql:host=172.31.22.43;dbname=Illia200453638';
 
 $username = 'Illia200453638';
-$password = ''; 
+$password = '9JGPrwrjLp'; 
 
 $db = new PDO($dsn,$username,$password);
 

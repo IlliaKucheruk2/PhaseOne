@@ -60,7 +60,19 @@ if(!empty($_GET['id']) && (is_numeric($_GET['id']))) {
                 <input type="datetime-local" id="date" name="date"  class="form-control" value="<?php echo $date ?>">
             </div>           
             <input type="submit" value="submit" name="submit" >
+            
+        
         </form>
+        <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+        <?php include_once('config.php') ?>
+          <script src="https://www.google.com/recaptcha/api.js?render=<?= SITEKEY ?>"></script>
+          <script>
+            grecaptcha.ready(() => {
+              grecaptcha.execute("<?= SITEKEY ?>", { action: "register" })
+              .then(token => document.querySelector("#recaptchaResponse").value = token)
+              .catch(error => console.error(error));
+            });
+          </script>
     </main>
 
 
