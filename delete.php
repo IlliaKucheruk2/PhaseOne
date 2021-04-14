@@ -7,8 +7,8 @@ try{
 require('connect.php'); 
 
 $sql = "DELETE FROM contact_info WHERE user_id = :user_id"; 
-
-$statement = $db->prepare($sql); 
+$conn = dbo();
+$statement = $conn->prepare($sql); 
 $statement->bindParam(':user_id', $user_id);
 $statement->execute(); 
 
@@ -17,7 +17,7 @@ $statement->closeCursor();
 
 header('location:view.php');
 }
-catch(PDOException $e){
+catch(PDOException $error){
     echo '<p>Error</p>';
 }
 

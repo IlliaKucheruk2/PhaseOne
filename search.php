@@ -10,24 +10,24 @@
     require('connect.php');
 
     $query = "SELECT * FROM contact_info WHERE seat LIKE :search_table;"; 
-    $statement = $db->prepare($query);  
+    
+    $conn = dbo();
+    $statement = $conn->prepare($query);  
     $statement->bindValue(':search_table', '%'.$search_table.'%');
 
     $statement->execute(); 
 
     $info = $statement->fetchAll();
 //---------------------------------------------------------------------------------
-    $query1 = "SELECT seat FROM contact_info WHERE seat LIKE :search_table;"; 
-    $statement1 = $db->prepare($query1);  
+    $query1 = "SELECT seat FROM contact_info WHERE seat LIKE :search_table;";
+    $conn = dbo();
+    $statement1 = $conn->prepare($query1);  
     $statement1->bindValue(':search_table', '%'.$search_table.'%');
 
     $statement1->execute(); 
 
     $info1 = $statement->fetchAll();
 
-
-  
-    
 ?>
 
     <table class='table table-striped'><tbody>
@@ -41,7 +41,7 @@
             <td>" . $results['email']. "</td>
             <td>" . $results['seat']."</td>
             <td>" . $results['date']."</td>
-            <td><a href='index.php?id=" . $results['user_id']. "'>Edit order </a></td>
+            <td><a href='order.php?id=" . $results['user_id']. "'>Edit order </a></td>
             <td><a href='delete.php?id=" .$results['user_id']. "'> Delete order </a></td></tr>";
                 
         }

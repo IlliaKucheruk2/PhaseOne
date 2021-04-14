@@ -1,4 +1,4 @@
-<?php require('header.php'); ?>
+<?php require('headerForUser.php');?>
 
 <h2> Search For Your Detail Of The Order: </h2> 
         <form action="search.php" method="get">
@@ -9,13 +9,14 @@
                 <input type="submit" name="submit" value="Search" class="btn btn-primary">
             </div>
         </form>
+        
 <?php
 
 require('connect.php'); 
 
 $sql = "SELECT * FROM contact_info"; 
-
-$statement = $db->prepare($sql); 
+$conn = dbo();
+$statement = $conn->prepare($sql); 
 $statement->execute(); 
 $info = $statement->fetchAll(); 
 
@@ -32,7 +33,7 @@ foreach($info as $record) {
     <td>" . $record['email']. "</td>
     <td>" . $record['seat']."</td>
     <td>" . $record['date']."</td>
-    <td><a href='index.php?id=" . $record['user_id']. "'>Edit order </a></td>
+    <td><a href='order.php?id=" . $record['user_id']. "'>Edit order </a></td>
     <td><a href='delete.php?id=" .$record['user_id']. "'> Delete order </a></td></tr>";
 }
 
@@ -41,5 +42,5 @@ echo "</tbody></table>";
 $statement->closeCursor(); 
 
 ?>
-
+<a class="btn btn-dark" href="logout.php">Logout</a>
 <?php require('footer.php'); ?>
