@@ -1,6 +1,6 @@
 <?php 
         ob_start(); 
-        require('header.php');
+         require('headerForUser.php');
 
         $first_name = filter_input(INPUT_POST, 'fname');
         $last_name = filter_input(INPUT_POST, 'lname');
@@ -23,39 +23,6 @@
 
         require('connect.php');  
 
-        // check seat availability
-        $sql = "SELECT COUNT(*) from contact_info WHERE seat = :seat"; 
-        $statement = $db->prepare($sql);
-        $statement->execute(array('seat' => $seat));
-        $number_of_tables = $statement->fetchColumn(); 
-
-         // check if email is repeat 
-         $sql = "SELECT COUNT(*) from contact_info WHERE email = :email"; 
-         $statement = $db->prepare($sql);
-         $statement->execute(array('email' => $email));
-         $number_of_email = $statement->fetchColumn(); 
-
-        // check if date is repeat 
-        $sql = "SELECT COUNT(*) from contact_info WHERE date = :date"; 
-        $statement = $db->prepare($sql);
-        $statement->execute(array('date' => $date));
-        $number_of_date = $statement->fetchColumn(); 
-
-        if ($number_of_tables > 0 ) {
-                echo "<p>This seat is unavailable. Please select another one.</p>";
-            $value = false;  
-        }
-        else if ($number_of_email  > 0) {
-            echo "<p>This email was recorded before. Please write another one.</p>";
-            $value = false;  
-        }
-        else if ($number_of_date  > 0) {
-            echo "<p>This date  was recorded before. Please write another one.</p>";
-            $value = false;  
-        }
-    
-    
-        
         if($value === true) {
             try {
                
@@ -68,9 +35,9 @@
                     $sql = "INSERT into contact_info (first_name, last_name, email, seat, date) VALUES (:firstname, :lastname,  :email, :seat, :date);";
                 }
                 
-                echo "$sql";
-
-                $statement = $db->prepare($sql);
+        
+                $conn = dbo();
+                $statement = $conn->prepare($sql);
 
                 $statement->bindParam(':firstname', $first_name);
                 $statement->bindParam(':lastname', $last_name);
@@ -91,7 +58,7 @@
 
             
             }
-            catch(PDOException $e) {
+            catch(PDOException $error) {
              header('location:error.php');  
              echo $e->getMessage();
             }

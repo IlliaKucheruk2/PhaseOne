@@ -26,6 +26,9 @@
                 <a class="nav-link active" aria-current="page" href="index.php">Login</a>
                 </li>
                 <li class="nav-item">
+                <a class="nav-link" href="view.php">View Orders</a>
+                </li>
+                <li class="nav-item">
                 <a class="nav-link" href="#">Pricing</a>
                 </li>
                 <li class="nav-item">
